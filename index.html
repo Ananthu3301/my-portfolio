@@ -273,12 +273,56 @@
   }
 
   /* responsive */
+  @media (max-width: 780px){
+    .topbar-inner{
+      flex-wrap:wrap;
+      gap:10px 0;
+      padding:14px 20px;
+    }
+    .topbar-inner nav{
+      order:3;
+      width:100%;
+      gap:0;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      border-top:1px solid var(--grid);
+      padding-top:10px;
+      margin-top:2px;
+    }
+    .topbar-inner nav::-webkit-scrollbar{ display:none; }
+    .topbar-inner nav a{
+      flex:0 0 auto;
+      padding:4px 12px 8px 0;
+      white-space:nowrap;
+    }
+  }
+
   @media (max-width: 640px){
-    .skill-table{ grid-template-columns: 1fr; row-gap:8px; }
+    body{ font-size:16px; }
+    .wrap, .wrap-wide{ padding:0 20px; }
+    .hero{ padding:44px 0 36px; }
+    .hero h1{ max-width:none; }
+    .hero p.lede{ font-size:16.5px; }
+    .hero .contact-row{ font-size:12.5px; gap:8px 16px; }
+    .diagram{ margin-top:38px; }
+    section{ padding:44px 0; }
+    .section-head{ gap:10px; margin-bottom:22px; }
+    .section-head h2{ font-size:20px; }
+    .skill-table{ grid-template-columns: 1fr; row-gap:6px; }
     .skill-table .k{ padding-top:0; }
-    .misc-grid{ grid-template-columns:1fr; }
-    .topbar-inner nav{ gap:14px; }
-    .hero{ padding:64px 0 40px; }
+    .skill-table .v{ margin-bottom:8px; }
+    .project{ padding:20px; }
+    .project h3{ font-size:17px; }
+    .misc-grid{ grid-template-columns:1fr; gap:22px; }
+    .tline{ padding-left:22px; }
+    .titem::before{ left:-22px; }
+  }
+
+  @media (max-width: 400px){
+    .hero .contact-row{ flex-direction:column; gap:8px; }
+    .diagram svg{ min-width:520px; }
+    .diagram{ overflow-x:auto; }
   }
 </style>
 </head>
