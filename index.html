@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ananthakrishnan R — Computer Science Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1EE;
+    --grid:#DAE1DD;
+    --panel:#FAFBF9;
+    --ink:#152229;
+    --ink-soft:#4C5B5C;
+    --line:#3B5A66;
+    --line-soft:#7C959B;
+    --signal:#C85A2E;
+    --signal-soft:#E9CBB9;
+    --max:760px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      var(--paper);
+    background-size: 34px 34px, 34px 34px, auto;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .wrap{max-width: var(--max); margin:0 auto; padding: 0 28px;}
+  .wrap-wide{max-width: 980px; margin:0 auto; padding: 0 28px;}
+
+  /* ---------- Nav ---------- */
+  header.topbar{
+    position:sticky; top:0; z-index:20;
+    background:rgba(238,241,238,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--grid);
+  }
+  .topbar-inner{
+    max-width:980px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .topbar-inner .id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--line);
+  }
+  .topbar-inner nav{display:flex; gap:22px;}
+  .topbar-inner nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .topbar-inner nav a:hover{ color:var(--ink); border-color:var(--signal); }
+  .topbar-inner nav a:focus-visible, a:focus-visible{
+    outline:2px solid var(--signal); outline-offset:3px;
+  }
+  .nav-toggle{ display:none; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 88px 0 56px;
+    border-bottom:1px solid var(--grid);
+  }
+  .hero .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--line);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size: clamp(34px, 5.4vw, 52px);
+    line-height:1.12;
+    max-width:11ch;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:56ch;
+    font-size:18px;
+    color:var(--ink-soft);
+  }
+  .hero .contact-row{
+    margin-top:30px;
+    display:flex; flex-wrap:wrap; gap:10px 24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+  }
+  .hero .contact-row a{ text-decoration:none; border-bottom:1px solid var(--line-soft); }
+  .hero .contact-row a:hover{ border-color:var(--signal); color:var(--signal); }
+
+  /* network diagram */
+  .diagram{
+    margin-top:52px;
+  }
+  .diagram svg{ width:100%; height:auto; display:block; }
+  .diagram-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    fill:var(--ink-soft);
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 64px 0; border-bottom:1px solid var(--grid); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom: 30px;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--signal);
+    white-space:nowrap;
+  }
+  .section-head h2{ font-size:24px; }
+  .section-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--grid);
+    transform:translateY(2px);
+  }
+
+  /* About */
+  #about p{ max-width:64ch; color:var(--ink-soft); }
+  #about p + p{ margin-top:14px; }
+
+  /* Skills */
+  .skill-table{
+    display:grid;
+    grid-template-columns: 168px 1fr;
+    row-gap: 18px;
+    column-gap: 22px;
+  }
+  .skill-table .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--line);
+    padding-top:4px;
+  }
+  .skill-table .v{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:5px 10px;
+    background:var(--panel);
+    border:1px solid var(--grid);
+    border-radius:3px;
+    color:var(--ink);
+  }
+
+  /* Projects */
+  .project{
+    background:var(--panel);
+    border:1px solid var(--grid);
+    border-left:3px solid var(--line);
+    padding:26px 28px;
+    border-radius:4px;
+  }
+  .project + .project{ margin-top:20px; }
+  .project h3{ font-size:19px; }
+  .project .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--signal);
+    margin-top:4px;
+    margin-bottom:14px;
+  }
+  .project ul{ padding-left:20px; color:var(--ink-soft); }
+  .project li + li{ margin-top:8px; }
+  .project li::marker{ color:var(--line-soft); }
+
+  /* Experience / Education timeline */
+  .tline{ position:relative; padding-left:26px; }
+  .tline::before{
+    content:"";
+    position:absolute; left:6px; top:6px; bottom:6px;
+    width:1px; background:var(--grid);
+  }
+  .titem{ position:relative; padding-bottom:32px; }
+  .titem:last-child{ padding-bottom:0; }
+  .titem::before{
+    content:"";
+    position:absolute; left:-26px; top:5px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--line);
+  }
+  .titem .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--line);
+  }
+  .titem h3{ font-size:17px; margin-top:4px; }
+  .titem .org{ color:var(--ink-soft); font-size:14.5px; margin-top:2px; }
+  .titem ul{ margin-top:10px; padding-left:20px; color:var(--ink-soft); font-size:15.5px; }
+  .titem li + li{ margin-top:6px; }
+
+  /* Certs / activities */
+  .misc-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .misc-grid h3{
+    font-size:14px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--line);
+    font-weight:500;
+    margin-bottom:12px;
+  }
+  .misc-grid ul{ list-style:none; color:var(--ink-soft); font-size:15px; }
+  .misc-grid li{ padding:8px 0; border-top:1px solid var(--grid); }
+  .misc-grid li:first-child{ border-top:none; }
+
+  /* Contact / footer */
+  #contact{ text-align:left; }
+  #contact .lede{ color:var(--ink-soft); max-width:52ch; margin-bottom:28px; }
+  .contact-links{
+    display:flex; flex-direction:column; gap:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    display:inline-flex; align-items:baseline; gap:10px;
+    width:fit-content;
+    border-bottom:1px solid transparent;
+  }
+  .contact-links a .k{ color:var(--line-soft); font-size:12.5px; }
+  .contact-links a:hover{ border-color:var(--signal); color:var(--signal); }
+
+  footer{
+    padding:26px 0 50px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--line-soft);
+  }
+
+  /* motion respect */
+  @media (prefers-reduced-motion: reduce){
+    .pulse{ animation:none !important; }
+  }
+
+  /* responsive */
+  @media (max-width: 640px){
+    .skill-table{ grid-template-columns: 1fr; row-gap:8px; }
+    .skill-table .k{ padding-top:0; }
+    .misc-grid{ grid-template-columns:1fr; }
+    .topbar-inner nav{ gap:14px; }
+    .hero{ padding:64px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="id">AR<span style="color:var(--signal)">.</span>dev</div>
+    <nav>
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="kicker">B.Tech CSE, Government Engineering College Palakkad · 2026</div>
+    <h1>Ananthakrishnan R</h1>
+    <p class="lede">A computer science engineer who got here through electronics — comfortable tracing a problem from a broken socket connection down to the TCP handshake underneath it. Looking for an entry-level role in development, DevOps, cloud, or networking.</p>
+    <div class="contact-row">
+      <a href="mailto:ananthurg4@gmail.com">ananthurg4@gmail.com</a>
+      <a href="tel:+918848683301">+91 88486 83301</a>
+      <a href="https://www.linkedin.com/in/ananthurg" target="_blank" rel="noopener">linkedin.com/in/ananthurg</a>
+      <span>Palakkad, Kerala</span>
+    </div>
+
+    <div class="diagram" aria-hidden="true">
+      <svg viewBox="0 0 720 110" preserveAspectRatio="xMinYMid meet">
+        <line x1="40" y1="55" x2="680" y2="55" stroke="#7C959B" stroke-width="1" stroke-dasharray="2 6"/>
+
+        <g>
+          <rect x="20" y="40" width="40" height="30" rx="3" fill="none" stroke="#3B5A66" stroke-width="1.4"/>
+          <text x="40" y="90" text-anchor="middle" class="diagram-label">client</text>
+        </g>
+
+        <g>
+          <circle cx="250" cy="55" r="17" fill="none" stroke="#3B5A66" stroke-width="1.4"/>
+          <text x="250" y="90" text-anchor="middle" class="diagram-label">router</text>
+        </g>
+
+        <g>
+          <rect x="415" y="35" width="46" height="40" rx="3" fill="none" stroke="#3B5A66" stroke-width="1.4"/>
+          <line x1="415" y1="47" x2="461" y2="47" stroke="#3B5A66" stroke-width="1"/>
+          <line x1="415" y1="59" x2="461" y2="59" stroke="#3B5A66" stroke-width="1"/>
+          <text x="438" y="90" text-anchor="middle" class="diagram-label">server</text>
+        </g>
+
+        <g>
+          <path d="M630 60 a14 14 0 0 1 0-28 h6 a18 18 0 0 1 34 6 a13 13 0 0 1 -4 40 h-36 a12 12 0 0 1 0-18 z"
+                transform="translate(0,4) scale(1)"
+                fill="none" stroke="#3B5A66" stroke-width="1.4"/>
+          <text x="660" y="90" text-anchor="middle" class="diagram-label">cloud</text>
+        </g>
+
+        <circle r="4" fill="#C85A2E" class="pulse">
+          <animateMotion dur="4.5s" repeatCount="indefinite"
+            path="M60,55 L680,55" />
+        </circle>
+      </svg>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="section-head"><span class="tag">01 · about</span><h2>Background</h2></div>
+    <p>I'm finishing a B.Tech in Computer Science and Engineering at Government Engineering College, Palakkad, after an earlier diploma in Electronics Engineering. That order matters — I learned circuits and signals before I learned software, so I tend to think about systems from the hardware up: what's actually happening at the socket, the shell, the network layer.</p>
+    <p>Day to day I work in Python and the Linux command line, I'm comfortable with Git and REST APIs, and I've spent a year in a hands-on apprenticeship troubleshooting medical technology systems. I'm looking for an entry-level role where I can keep building — development, DevOps, cloud, or networking all fit what I know and what I want to learn next.</p>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="section-head"><span class="tag">02 · skills</span><h2>Technical skills</h2></div>
+    <div class="skill-table">
+      <div class="k">Programming</div>
+      <div class="v"><span class="chip">Python</span><span class="chip">C</span></div>
+
+      <div class="k">Operating systems</div>
+      <div class="v"><span class="chip">Linux</span><span class="chip">Windows</span></div>
+
+      <div class="k">Shell & scripting</div>
+      <div class="v"><span class="chip">Bash</span><span class="chip">Shell scripting</span><span class="chip">Linux CLI</span></div>
+
+      <div class="k">Networking</div>
+      <div class="v"><span class="chip">TCP/IP</span><span class="chip">HTTP/HTTPS</span><span class="chip">DNS</span><span class="chip">DHCP</span><span class="chip">IP addressing</span></div>
+
+      <div class="k">Web & APIs</div>
+      <div class="v"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">REST APIs</span></div>
+
+      <div class="k">Database</div>
+      <div class="v"><span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">DBMS</span></div>
+
+      <div class="k">Backend & app</div>
+      <div class="v"><span class="chip">Firebase</span><span class="chip">Socket connections</span><span class="chip">Flutter</span></div>
+
+      <div class="k">Cloud & CS core</div>
+      <div class="v"><span class="chip">Cloud computing</span><span class="chip">Data structures</span><span class="chip">Operating systems</span><span class="chip">OOP</span></div>
+
+      <div class="k">Tools</div>
+      <div class="v"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Postman</span><span class="chip">VS Code</span></div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <div class="section-head"><span class="tag">03 · projects</span><h2>Projects</h2></div>
+
+    <div class="project">
+      <h3>Cognify — assistive learning platform for blind students</h3>
+      <div class="role">Python · OCR · Speech-to-Text · Text-to-Speech</div>
+      <ul>
+        <li>Built an application that extracts text from images and PDFs so it can be read aloud, using OCR combined with speech-to-text and text-to-speech.</li>
+        <li>Added text simplification so extracted educational content is easier to follow by ear.</li>
+        <li>Handled the processing pipeline and API integration in Python end to end.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <h3>StudiFy — student collaboration & learning platform</h3>
+      <div class="role">REST APIs · Real-time chat · Database services</div>
+      <ul>
+        <li>Built a collaboration platform with real-time chat, file sharing, study groups, and user authentication.</li>
+        <li>Added an AI-powered chatbot and study-material recommendations.</li>
+        <li>Implemented study scheduling and progress tracking, backed by REST APIs and a database.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="section-head"><span class="tag">04 · experience</span><h2>Experience & education</h2></div>
+    <div class="tline">
+      <div class="titem">
+        <div class="when mono">2022 — 2023</div>
+        <h3>Apprentice Trainee</h3>
+        <div class="org">Medical Technologies, Palakkad</div>
+        <ul>
+          <li>Assisted technical teams with monitoring, troubleshooting, and maintaining medical technology systems and electronic devices.</li>
+          <li>Supported diagnosis and resolution of technical issues during live system operation.</li>
+          <li>Followed structured troubleshooting and maintenance procedures alongside senior technicians.</li>
+        </ul>
+      </div>
+      <div class="titem">
+        <div class="when mono">2023 — 2026</div>
+        <h3>B.Tech, Computer Science and Engineering</h3>
+        <div class="org">Government Engineering College, Palakkad</div>
+      </div>
+      <div class="titem">
+        <div class="when mono">2017 — 2020</div>
+        <h3>Diploma, Electronics Engineering</h3>
+        <div class="org">Government Polytechnic College, Palakkad</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" class="wrap">
+    <div class="section-head"><span class="tag">05 · more</span><h2>Certifications & activities</h2></div>
+    <div class="misc-grid">
+      <div>
+        <h3>Certifications</h3>
+        <ul>
+          <li>NPTEL — Python for Data Science</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Leadership & activities</h3>
+        <ul>
+          <li>Student member, ISTE (2023 — present)</li>
+          <li>Student member, µLearn GEC Palakkad (2023 — present)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="section-head"><span class="tag">06 · contact</span><h2>Get in touch</h2></div>
+    <p class="lede">Open to entry-level roles in development, DevOps, cloud, or networking. The fastest way to reach me is email.</p>
+    <div class="contact-links">
+      <a href="mailto:ananthurg4@gmail.com"><span class="k">mail</span> ananthurg4@gmail.com</a>
+      <a href="tel:+918848683301"><span class="k">call</span> +91 88486 83301</a>
+      <a href="https://www.linkedin.com/in/ananthurg" target="_blank" rel="noopener"><span class="k">in</span> linkedin.com/in/ananthurg</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Ananthakrishnan R · Palakkad, Kerala
+</footer>
+
+</body>
+</html>
